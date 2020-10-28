@@ -1,4 +1,4 @@
-# Office365-forensic-guide
+Office 365 CIS Benchmark - н тохиргоо хийгдсэн эсэхийг SecurescoringOffice365Benchmark.ps1 скриптыг ашиглаж автоматаар шалгана уу. 
 
 
 # Скрипт ажиллуулахад шаардлагатай зүйлс :
