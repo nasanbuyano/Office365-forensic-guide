@@ -11,5 +11,5 @@
 # Жишээ :  
 
   - Домайн админ эрхээр ажиллуулах
-  
+    ![aaa](/images/domain_credential.png)
   
