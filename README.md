@@ -12,5 +12,6 @@
 
   1. Домайн админ эрхээр ажиллуулах
   ![aaa](/images/domain_credential.png)
-  2.
+  2. Application id болон client secret дээр Azure дээр үүсгэсэн шинэ аппликэйшны id болон secret - г оруулж өгнө. 
+  ![aaaa](/images/credentials.png)
   
