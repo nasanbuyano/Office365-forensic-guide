@@ -14,4 +14,5 @@
   ![aaa](/images/domain_credential.png)
   2. Application id болон client secret дээр Azure дээр үүсгэсэн шинэ аппликэйшны id болон secret - г оруулж өгнө. 
   ![aaaa](/images/credentials.png)
-  
+  3. success.json, failed.json, score.txt гэсэн файл үүсэх бөгөөд амжилттай хийгдсэн тохиргоо нь жишээ нь дараах байдлаар харагдана. 
+  ![bbbb](/images/success.png)
