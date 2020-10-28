@@ -10,6 +10,7 @@
   
 # Жишээ :  
 
-  - Домайн админ эрхээр ажиллуулах
-    ![aaa](/images/domain_credential.png)
+  1. Домайн админ эрхээр ажиллуулах
+  ![aaa](/images/domain_credential.png)
+  2.
   
