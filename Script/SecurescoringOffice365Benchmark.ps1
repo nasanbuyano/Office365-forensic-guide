@@ -27,7 +27,7 @@ $header = @{ Authorization = "$($token.token_type) $($token.access_token)" }
 Connect-SPOService -Url $sharepointuri -Credential $credential
 function AzureActiveDirectory {
     #1.1.1 --------------------------------------------------------------------------------------
-
+ 
     (Invoke-WebRequest -Uri https://graph.microsoft.com/v1.0/security/secureScores?$top=1 -Headers $Header -Method Get -ContentType 'application/json' -UseBasicParsing | Select -ExpandProperty Content) -match "\WcontrolName\W:\WAdminMFAV2\W,\Wdescription\W:.*?\Wscore\W:(\d+\.\d)"
     $maxscore = (Invoke-RestMethod -Uri https://graph.microsoft.com/v1.0/security/secureScoreControlProfiles -Headers $Header -Method GET -ContentType 'application/json').value | Select-Object id,maxScore | Where-Object {$_.id -eq "AdminMFAV2"} | Select -ExpandProperty maxScore
     if($Matches[1] -eq $maxscore){
