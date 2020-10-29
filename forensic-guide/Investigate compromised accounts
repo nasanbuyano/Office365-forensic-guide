@@ -2,5 +2,14 @@
 хамтрагч байгууллага эсвэл бусад байгууллагаруу фишинг имэйл явуулж имэйл хаягуудыг эзлэх боломжийг илүү хялбар болгодог. Office 365 - н 
 аудит логийг ашиглаж дараах байдлаар эзлэгдсэн имэйлыг шинжлэх боломжтой. 
 
-#sdfsdf
+1. Халдагч этгээдийн тухайн имэйлыг эзлэж авсан хугацааг тодорхой болгох. Search-UnifiedAuditlog эсвэл SearchMailboxAuditLog гэсэн cmdlets - г
+ашиглаж MailitemsAccessed аудит рекордуудыг харах боломжтой. Search-UnifiedAuditLog - г ашиглаж олон хэрэглэгчийг зэрэг хайх боломжтой. 
+SearchMailboxAuditLog - г ашиглаж зөвхөн нэг хэрэглэгчийн рекордыг харах боломжтой. 
 
+- Unified audit log
+
+Search-UnifiedAuditLog -StartDate 01/06/2020 -EndDate 01/20/2020 -UserIds <user1,user2> -Operations MailItemsAccessed -ResultSize 1000
+
+- Mailbox audit log
+
+Search-MailboxAuditLog -Identity <user> -StartDate 01/06/2020 -EndDate 01/20/2020 -Operations MailItemsAccessed -ResultSize 1000 -ShowDetails
