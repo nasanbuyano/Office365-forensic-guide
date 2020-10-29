@@ -6,10 +6,49 @@
 ашиглаж MailitemsAccessed аудит рекордуудыг харах боломжтой. Search-UnifiedAuditLog - г ашиглаж олон хэрэглэгчийг зэрэг хайх боломжтой. 
 SearchMailboxAuditLog - г ашиглаж зөвхөн нэг хэрэглэгчийн рекордыг харах боломжтой. 
 
-- Unified audit log
+  - Unified audit log
 
-Search-UnifiedAuditLog -StartDate 01/06/2020 -EndDate 01/20/2020 -UserIds <user1,user2> -Operations MailItemsAccessed -ResultSize 1000
+  Search-UnifiedAuditLog -StartDate 01/06/2020 -EndDate 01/20/2020 -UserIds <user1,user2> -Operations MailItemsAccessed -ResultSize 1000
 
-- Mailbox audit log
+  - Mailbox audit log
 
-Search-MailboxAuditLog -Identity <user> -StartDate 01/06/2020 -EndDate 01/20/2020 -Operations MailItemsAccessed -ResultSize 1000 -ShowDetails
+  Search-MailboxAuditLog -Identity <user> -StartDate 01/06/2020 -EndDate 01/20/2020 -Operations MailItemsAccessed -ResultSize 1000 -ShowDetails
+
+2. Mailbox throttled болсон эсэхийг шалгах. Хэрвээ throttled болсон бол аудит лог дээр "IsThrottled","Value":"True" гэсэн лог бичдэг. Имэйл throttled 
+болсон бол тухайн үйлдлийг хийсэнээс хойш 24 цаг аудит лог бичдэггүй. Хэрвээ "IsThrottled","Value":"True" гэсэн лог байх юм бол тухайн имэйлын
+дата халдагч этгээдэд бүрэн эзлэгдсэн гэж үзэж болно. 
+
+  - Unified audit log
+
+  Search-UnifiedAuditLog -StartDate 01/06/2020 -EndDate 01/20/2020 -UserIds <user1,user2> -Operations MailItemsAccessed -ResultSize 1000 | 
+  Where {$_.AuditData -like '*"IsThrottled","Value":"True"*'} | FL
+  
+  - Mailbox audit log
+
+  Search-MailboxAuditLog -StartDate 01/06/2020 -EndDate 01/20/2020 -Identity <user> -Operations MailItemsAccessed -ResultSize 10000 -ShowDetails | 
+  Where {$_.OperationProperties -like "*IsThrottled:True*"} | FL
+  
+3.  Sync activities - г шалгах. Хэврээ халдагч этгээд нь mailbox руугаа эзлэгдсэн хаягийн имэйлүүдийг sync хийж авсан бол интернет холболтоо
+салгах боломжтой. Ингэснээр имэйл сервертэй холбогдохгүй бөгөөд mailbox auditing лог бичих боломжгүй. 
+
+  - Unified audit log
+
+  Search-UnifiedAuditLog -StartDate 01/06/2020 -EndDate 02/20/2020 -UserIds <user1,user2> -Operations MailItemsAccessed -ResultSize 1000 | 
+  Where {$_.AuditData -like '*"MailAccessType","Value":"Sync"*'} | FL
+  
+  - Mailbox audit log
+
+  Search-MailboxAuditLog -StartDate 01/06/2020 -EndDate 01/20/2020 -Identity <user> -Operations MailItemsAccessed -ResultSize 10000 -ShowDetails | 
+  Where {$_.OperationProperties -like "*MailAccessType:Sync*"} | FL
+  
+4. Bind activities шалгах
+
+  - Unified audit log
+
+  Search-UnifiedAuditLog -StartDate 01/06/2020 -EndDate 01/20/2020 -UserIds <user1,user2> -Operations MailItemsAccessed -ResultSize 1000 | 
+  Where {$_.AuditData -like '*"MailAccessType","Value":"Bind"*'} | FL
+  
+  - Mailbox audit log
+
+  Search-MailboxAuditLog -StartDate 01/06/2020 -EndDate 01/20/2020 -Identity <user> -Operations MailItemsAccessed -ResultSize 10000 -ShowDetails | 
+  Where {$_.OperationProperties -like "*MailAccessType:Bind*"} | FL
