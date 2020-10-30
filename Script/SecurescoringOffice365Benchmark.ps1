@@ -14,6 +14,7 @@ Connect-MsolService -Credential $credential
 Connect-ExchangeOnline -Credential $credential
 $input = Read-Host -Prompt 'Please enter your sharepoint tenat name:'
 $sharepointuri = "https://" + $input + "-admin.sharepoint.com"
+$input2 = Read-Host -Prompt 'Please enter your domain name:'
 $Body = @{
 scope = "https://graph.microsoft.com/.default"
 grant_type = "client_credentials"
@@ -114,7 +115,7 @@ function AzureActiveDirectory {
 
     #1.5 ----------------------------------------------------------------------------------------
     
-    if ((Get-MsolPasswordPolicy -DomainName mobicom.mn | Select -ExpandProperty "ValidityPeriod") -eq 2147483647 ){
+    if ((Get-MsolPasswordPolicy -DomainName $input2 | Select -ExpandProperty "ValidityPeriod") -eq 2147483647 ){
         $scoresuccess.Add('1.5 Ensure that Office 365 Passwords Are Not Set to Expire', 'Success')
     }
     else {
