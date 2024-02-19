@@ -1,4 +1,4 @@
-﻿#Author: @nasamoskva
+﻿#Author: @nasanbuyan
 #Date: 2020-10-27
 #Version: 1.0
 
